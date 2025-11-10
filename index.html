@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnicatura en Informática Profesional y Personal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links .nav-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            left: 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #667eea;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0f28 0%, #1a1f3a 100%);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 15, 40, 0.3);
+            z-index: 1;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation Buttons Section */
+        .nav-buttons-section {
+            padding: 60px 20px;
+            background: #0a0f28;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-buttons-container {
+            display: flex;
+            width: 100%;
+        }
+
+        .nav-button-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            padding: 25px 50px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            min-width: 220px;
+            text-align: center;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+            border-radius: 15px;
+        }
+
+        .nav-button:hover::before {
+            left: 0;
+        }
+
+        .nav-button:hover {
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Perfil Section */
+        #aprender {
+            padding: 100px 20px 80px;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .profiles-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .profile {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .profile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .card-habilidades {
+            border-top: 5px solid #667eea;
+        }
+
+        .card-caracteristicas {
+            border-top: 5px solid #f093fb;
+        }
+
+        .profile h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .profile ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile li {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: padding-left 0.3s ease;
+        }
+
+        .profile li:hover {
+            padding-left: 10px;
+            color: #667eea;
+        }
+
+        .profile li:last-child {
+            border-bottom: none;
+        }
+
+        /* Technologies Section */
+        #technologies {
+            padding: 100px 20px 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #technologies h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tech-icon-wrapper {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tech-icon-wrapper:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .tech-icon-wrapper:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .tech-icon-wrapper:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .tech-icon-wrapper:hover {
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .tech-icon-wrapper span {
+            font-size: 3rem;
+        }
+
+        /* Projects Section */
+        #juegos, #apps {
+            padding: 100px 20px 80px;
+            background: #f8f9fa;
+        }
+
+        #juegos h2, #apps h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        #apps {
+            background: #e9ecef;
+        }
+
+        .project-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .project-item {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-item img {
+            width: 40%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .project-info p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .project-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            padding: 100px 20px 80px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        #testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info .description {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-comment {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .carousel-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            transform: scale(1.1);
+            background: #667eea;
+            color: white;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 100px 20px 80px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            text-align: center;
+            color: white;
+        }
+
+        #contact h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 20px 50px;
+            background: white;
+            color: #f5576c;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        #footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-links .nav-row {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 15px 20px;
+                margin: 5px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            #hero {
+                height: calc(100vh - 70px);
+            }
+
+            .nav-button {
+                min-width: 170px;
+                padding: 18px 35px;
+                font-size: 1.1rem;
+            }
+
+            .nav-buttons-section {
+                padding: 40px 20px;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            .profiles-container {
+                flex-direction: column;
+            }
+
+            .profile {
+                min-width: auto;
+            }
+
+            .project-item {
+                flex-direction: column !important;
+            }
+
+            .project-item img {
+                width: 100%;
+                height: 250px;
+            }
+
+            .title, #technologies h2, #juegos h2, #apps h2, #testimonials h2 {
+                font-size: 2rem;
+            }
+
+            #contact h2 {
+                font-size: 2rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-button-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button-row.side-by-side {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Expo Técnica 2025</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#aprender" class="nav-link">Perfil Profesional</a></li>
+                <li><a href="#technologies" class="nav-link">Tecnologías</a></li>
+                <li class="nav-row">
+                    <a href="#juegos" class="nav-link">Juegos</a>
+                    <a href="#apps" class="nav-link">Apps</a>
+                </li>
+                <li><a href="#testimonials" class="nav-link">Reseñas</a></li>
+                <li><a href="#contact" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="hero-content">
+            <img src="img/a8c12604-9a7d-4ed8-99f0-af7c7ab3bbb5.jpeg" alt="Tecnicatura en Informática Profesional y Personal" style="max-width: 90%; height: auto; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+        </div>
+    </header>
+
+    <!-- Navigation Buttons Section -->
+    <section class="nav-buttons-section">
+        <div class="nav-buttons-container">
+            <div class="nav-button-row">
+                <a href="#aprender" class="nav-button">Perfil Profesional</a>
+            </div>
+            <div class="nav-button-row">
+                <a href="#technologies" class="nav-button">Tecnologías</a>
+            </div>
+            <div class="nav-button-row side-by-side">
+                <a href="#juegos" class="nav-button">Juegos</a>
+                <a href="#apps" class="nav-button">Apps</a>
+            </div>
+            <div class="nav-button-row">
+                <a href="#testimonials" class="nav-button">Reseñas</a>
+            </div>
+            <div class="nav-button-row">
+                <a href="#contact" class="nav-button">Contacto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfil Section -->
+    <section id="aprender">
+        <h2 class="title">Perfil Profesional</h2>
+        <div class="profiles-container">
+            <div class="profile card-habilidades">
+                <h3>
+                    💼 Habilidades Profesionales
+                </h3>
+                <ul>
+                    <li><strong>Conocimientos en Hardware:</strong> Capacidad para ensamblar, reparar y mantener equipos de cómputo, impresoras y otros periféricos.</li>
+                    <li><strong>Dominio de Sistema Operativo:</strong> Experiencia en la instalación y configuración de sistemas operativos como Windows.</li>
+                    <li><strong>Redes Informáticas:</strong> Comprensión de la configuración de redes, protocolos de comunicación, y administración de dispositivos de red.</li>
+                    <li><strong>Programación:</strong> Habilidades en lenguajes como Javascript y Python.</li>
+                    <li><strong>Bases de Datos:</strong> Manejo de bases de datos, con conocimientos en SQL y su administración.</li>
+                    <li><strong>Ciberseguridad:</strong> Conocimiento de las mejores prácticas para proteger la información y asegurar la integridad de los sistemas.</li>
+                </ul>
+            </div>
+
+            <div class="profile card-caracteristicas">
+                <h3>
+                    ⭐ Características Personales
+                </h3>
+                <ul>
+                    <li><strong>Analítico y Resolutivo:</strong> Habilidad para abordar y solucionar problemas de manera lógica y eficiente.</li>
+                    <li><strong>Responsable y Comprometido:</strong> Foco en el cumplimiento de tareas y plazos establecidos.</li>
+                    <li><strong>Comunicativo:</strong> Capacidad para explicar conceptos técnicos a personas no expertas y colaborar en equipo.</li>
+                    <li><strong>Proactivo:</strong> Iniciativa para aprender y aplicar nuevas tecnologías y herramientas.</li>
+                    <li><strong>Adaptable:</strong> Flexibilidad para ajustarse a nuevas situaciones y entornos cambiantes.</li>
+                    <li><strong>Paciente:</strong> Habilidad para trabajar con usuarios de diferentes niveles de experiencia técnica.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies">
+        <h2>¿Qué aprendemos durante la especialización?</h2>
+        <div class="tech-icons">
+            <div class="tech-icon-wrapper" title="HTML5">
+                <span style="color: #E34F26; font-weight: bold; font-family: monospace;">HTML</span>
+            </div>
+            <div class="tech-icon-wrapper" title="CSS3">
+                <span style="color: #1572B6; font-weight: bold; font-family: monospace;">CSS</span>
+            </div>
+            <div class="tech-icon-wrapper" title="JavaScript">
+                <span style="color: #F7DF1E; font-weight: bold; font-family: monospace; background: #323330; padding: 10px; border-radius: 10px;">JS</span>
+            </div>
+            <div class="tech-icon-wrapper" title="React">
+                <span style="color: #61DAFB; font-weight: bold; font-family: monospace;">React</span>
+            </div>
+            <div class="tech-icon-wrapper" title="SQL">
+                <span style="color: #4479A1; font-weight: bold; font-family: monospace;">SQL</span>
+            </div>
+            <div class="tech-icon-wrapper" title="Seguridad Informática">
+                <span>🔒</span>
+            </div>
+            <div class="tech-icon-wrapper" title="Reparación de Computadoras">
+                <span>🔧</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section - Juegos -->
+    <section id="juegos">
+        <h2>Juegos Desarrollados</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Juegos desarrollados por alumnos de 4to, 6to y 7mo Informática 2025
+        </p>
+        <div class="project-grid">
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" alt="Juego 1">
+                <div class="project-info">
+                    <h3>Juego de Aventuras</h3>
+                    <p>Juego desarrollado con JavaScript y Canvas para una experiencia inmersiva y entretenida.</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" alt="Juego 2">
+                <div class="project-info">
+                    <h3>Puzzle Interactivo</h3>
+                    <p>Juego de lógica y estrategia creado para desafiar la mente de los jugadores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps">
+        <h2>Aplicaciones Desarrolladas</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Aplicaciones desarrolladas por alumnos de 4to, 6to y 7mo Informática 2025
+        </p>
+        <div class="project-grid">
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600" alt="App 1">
+                <div class="project-info">
+                    <h3>App de Gestión Escolar</h3>
+                    <p>Aplicación web para administrar horarios, calificaciones y comunicación escolar.</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600" alt="App 2">
+                <div class="project-info">
+                    <h3>Sistema de Inventario</h3>
+                    <p>Herramienta completa para control de stock y gestión de productos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>Reseñas de Estudiantes</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card" id="testimonial-display">
+                <div class="testimonial-header">
+                    <div class="avatar" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">👤</div>
+                    <div class="testimonial-info">
+                        <h4 id="testimonial-name">Milii Vega</h4>
+                        <p class="description" id="testimonial-desc">Estudiante de Informática</p>
+                    </div>
+                </div>
+                <p class="testimonial-comment" id="testimonial-comment">
+                    "La tecnicatura me ha brindado las herramientas necesarias para desarrollarme profesionalmente. Los docentes son excelentes y el contenido muy actualizado."
+                </p>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="changeTestimonial(-1)">‹</button>
+                <button class="carousel-btn" onclick="changeTestimonial(1)">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>¿Listo para aprender más?</h2>
+        <a href="https://www.instagram.com/escuelatecnicaesquina" class="contact-btn">¡Inscríbete ahora!</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="social-links">
+            <a href="https://maps.app.goo.gl/MTHnvxQaPQjY6Kb66" class="social-icon">📍</a>
+            <a href="https://www.facebook.com/profile.php?id=100065235921257" class="social-icon">📘</a>
+            <a href="https://www.instagram.com/escuelatecnicaesquina" class="social-icon">📷</a>
+            <a href="#" class="social-icon">💻</a>
+        </div>
+        <p>© 2025 Escuela Técnica Dr. J. R. Vidal. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Testimonials
+        const testimonials = [
+            {
+                name: "Milii Vega",
+                desc: "Estudiante de Informática",
+                comment: "La tecnicatura me ha brindado las herramientas necesarias para desarrollarme profesionalmente. Los docentes son excelentes y el contenido muy actualizado."
+            },
+            {
+                name: "Pri Benítez",
+                desc: "Estudiante de Informática",
+                comment: "Gracias a la formación recibida, conseguí trabajo en una empresa de tecnología. El nivel académico es muy bueno y la experiencia práctica invaluable."
+            },
+            {
+                name: "Brisa Alexa",
+                desc: "Estudiante de Informática",
+                comment: "La mejor decisión fue estudiar aquí. Aprendí desde lo básico hasta tecnologías avanzadas que uso en mi trabajo diario."
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        function changeTestimonial(direction) {
+            currentTestimonial += direction;
+            if (currentTestimonial < 0) currentTestimonial = testimonials.length - 1;
+            if (currentTestimonial >= testimonials.length) currentTestimonial = 0;
+
+            const testimonial = testimonials[currentTestimonial];
+            document.getElementById('testimonial-name').textContent = testimonial.name;
+            document.getElementById('testimonial-desc').textContent = testimonial.desc;
+            document.getElementById('testimonial-comment').textContent = testimonial.comment;
+
+            const card = document.getElementById('testimonial-display');
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(' + (direction * 20) + 'px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+            }, 100);
+        }
+
+        // Navbar
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.getElementById('navbar');
+        const navLinkItems = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinkItems.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-item, .profile').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
