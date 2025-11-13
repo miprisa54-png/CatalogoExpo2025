@@ -749,12 +749,19 @@ footer p {
 
     /* Hero */
     #hero {
+        margin-top: 70px;
         height: calc(100vh - 70px);
     }
 
     #hero h1 {
         font-size: 2.2rem;
         padding: 0 20px;
+    }
+
+    .hero-content img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
 
     /* Botones de navegación */
@@ -793,7 +800,8 @@ footer p {
 
     /* Tecnologías */
     .tech-icons {
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 30px;
     }
 
     .tech-icon-wrapper {
@@ -802,18 +810,14 @@ footer p {
     }
 
     .tech-item img {
-    width: 60px;
-    height: 60px;
-}
+        width: 75px;
+        height: 75px;
+    }
 
-.tech-item p {
-    font-size: 0.95rem;
-}
+    .tech-item p {
+        font-size: 1.1rem;
+    }
 
-.tech-icons {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 30px;
-}
     /* Proyectos */
     .project-item {
         flex-direction: column !important;
@@ -887,8 +891,19 @@ footer p {
         font-size: 1.1rem;
     }
 
+    #hero {
+        margin-top: 70px;
+        height: calc(100vh - 70px);
+    }
+
     #hero h1 {
         font-size: 1.8rem;
+    }
+
+    .hero-content img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
 
     .nav-button {
@@ -916,14 +931,24 @@ footer p {
         padding: 12px 0;
     }
 
+    .tech-icons {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 25px;
+    }
+
     .tech-icon-wrapper {
         width: 70px;
         height: 70px;
     }
 
-    .tech-icons img {
-        width: 50px;
-        height: 50px;
+    .tech-item img {
+        width: 70px;
+        height: 70px;
+        padding: 12px;
+    }
+
+    .tech-item p {
+        font-size: 1rem;
     }
 
     .project-item img {
@@ -981,8 +1006,19 @@ footer p {
         font-size: 1rem;
     }
 
+    #hero {
+        margin-top: 70px;
+        height: calc(100vh - 70px);
+    }
+
     #hero h1 {
         font-size: 1.5rem;
+    }
+
+    .hero-content img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
 
     .nav-button {
@@ -999,14 +1035,24 @@ footer p {
         font-size: 1.2rem;
     }
 
+    .tech-icons {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 20px;
+    }
+
     .tech-icon-wrapper {
         width: 60px;
         height: 60px;
     }
 
-    .tech-icons img {
-        width: 40px;
-        height: 40px;
+    .tech-item img {
+        width: 65px;
+        height: 65px;
+        padding: 10px;
+    }
+
+    .tech-item p {
+        font-size: 0.9rem;
     }
 
     .project-info {
